@@ -1,0 +1,2 @@
+
+[info 2022/12/16 22:38:21.512 EST <restartedMain> tid=0x11] Log opened with new distributed system connection.  View[192.168.1.161(SpringBasedCacheServerApplication:5404)<ec><v0>:41000|0] members: [192.168.1.161(SpringBasedCacheServerApplication:5404)<ec><v0>:41000{lead}]

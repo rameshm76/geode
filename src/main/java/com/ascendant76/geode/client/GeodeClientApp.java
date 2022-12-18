@@ -14,7 +14,8 @@ import javax.annotation.Resource;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
-@SpringBootApplication(scanBasePackages = "com.ascendant76.geode.client")
+@SpringBootApplication(
+        scanBasePackages = {"com.ascendant76.geode.client", "com.ascendant76.geode.domain"})
 public class GeodeClientApp implements CommandLineRunner {
 
     @Autowired private AccountService accountService;
@@ -31,11 +32,17 @@ public class GeodeClientApp implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        log.info("Number of Entries stored before = {}", accountService.numberEntriesStoredOnServer());
+        log.info(
+                "Number of Entries stored before = {}",
+                accountService.numberEntriesStoredOnServer());
         accountService.createFiveAccounts();
         assertThat(accountService.numberEntriesStoredOnServer()).isEqualTo(5);
-        log.info("Number of Entries stored after = {}", accountService.numberEntriesStoredOnServer());
-        log.info("Account for ID before (transaction commit success) = {}", accountService.findById("2@2.com").get());
+        log.info(
+                "Number of Entries stored after = {}",
+                accountService.numberEntriesStoredOnServer());
+        log.info(
+                "Account for ID before (transaction commit success) = {}",
+                accountService.findById("2@2.com").get());
         accountService.updateAccountsSuccess();
         assertThat(accountService.numberEntriesStoredOnServer()).isEqualTo(5);
         var account = accountService.findById("2@2.com").get();
@@ -44,7 +51,9 @@ public class GeodeClientApp implements CommandLineRunner {
 
         account = accountService.findById("2@2.com").get();
         assertThat(account.getFirstName()).isEqualTo("Humpty");
-        log.info("Account for ID after (transaction commit failure) = {}", accountService.findById("2@2.com").get());
+        log.info(
+                "Account for ID after (transaction commit failure) = {}",
+                accountService.findById("2@2.com").get());
 
         var numpty = new Account("2@2.com", "Numpty", "Hamilton");
         var frumpy = new Account("2@2.com", "Frumpy", "Hamilton");

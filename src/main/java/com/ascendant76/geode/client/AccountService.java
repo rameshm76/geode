@@ -18,9 +18,11 @@ public class AccountService {
     private final AccountRepository accountRepository;
 
     @Resource(name = "Accounts")
-    private Region<String, Account> accountRegion;
+    private final Region<String, Account> accountRegion;
 
-    public AccountService(AccountRepository accountRepository, @Qualifier("Accounts") Region<String, Account> accountRegion) {
+    public AccountService(
+            AccountRepository accountRepository,
+            @Qualifier("Accounts") Region<String, Account> accountRegion) {
         this.accountRepository = accountRepository;
         this.accountRegion = accountRegion;
     }
